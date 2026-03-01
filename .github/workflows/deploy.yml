@@ -20,8 +20,12 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
 
-      - name: Deploy to EC2
+      - name: Deploy Files to EC2
         run: |
+          # Copy all files from repository to the Nginx directory
+          scp -r -i ~/.ssh/id_rsa ./* ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }}:/var/www/html/                
+          
+          # Restart Nginx to apply the changes
           ssh -i ~/.ssh/id_rsa ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} << 'EOF'
-            echo "Connected successfully!"
+            sudo systemctl restart nginx
           EOF
