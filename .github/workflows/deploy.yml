@@ -26,5 +26,5 @@ jobs:
           scp -r -i ~/.ssh/id_rsa ./* ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }}:/var/www/html/
           # Restart Nginx using the absolute path for systemctl
           ssh -i ~/.ssh/id_rsa ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} << 'EOF'
-            sudo service nginx restart
+            # sudo service nginx restart
           EOF
