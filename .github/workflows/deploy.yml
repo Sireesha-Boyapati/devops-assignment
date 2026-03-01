@@ -23,9 +23,8 @@ jobs:
       - name: Deploy Files to EC2
         run: |
           # Copy all files from repository to the Nginx directory
-          scp -r -i ~/.ssh/id_rsa ./* ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }}:/var/www/html/                
-          
-          # Restart Nginx to apply the changes
+          scp -r -i ~/.ssh/id_rsa ./* ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }}:/var/www/html/
+          # Restart Nginx using the absolute path for systemctl
           ssh -i ~/.ssh/id_rsa ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} << 'EOF'
-            sudo systemctl restart nginx
+            sudo /bin/systemctl restart nginx
           EOF
