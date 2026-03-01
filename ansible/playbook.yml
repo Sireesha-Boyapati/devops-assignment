@@ -1,0 +1,27 @@
+---
+- name: Deploy Docker container to EC2
+  hosts: all
+  become: yes
+  tasks:
+    - name: Ensure docker is installed (optional based on your EC2 setup)
+      package:
+        name: docker
+        state: present
+
+    - name: Pull the latest Docker image
+      docker_image:
+        name: sireeshaboyapati28/my-app:latest
+        source: pull
+
+    - name: Stop and remove existing container (if any)
+      docker_container:
+        name: my-web-app
+        state: absent
+
+    - name: Run the container
+      docker_container:
+        name: my-web-app
+        image: sireeshaboyapati28/my-app:latest
+        state: started
+        ports:
+          - "80:80"
