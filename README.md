@@ -10,7 +10,7 @@ Docker Hub Account
 GitHub Repository
 EC2 Key Pair (devops-key.pem)
 GitHub Secrets
-Configure the following in your repository settings under Secrets and variables > Actions:
+Configured the following in my repository settings under Secrets and variables > Actions:
 DOCKER_USERNAME: sireeshaboyapati28
 DOCKER_PASSWORD: dckr_pat_OKt85rYPGLQim6sb4yw-heylqyo
 EC2_HOST: 34.242.233.236
